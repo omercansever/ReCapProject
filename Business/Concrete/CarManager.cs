@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,10 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _CarDal;
-        private RentACarDb rentACarDb;
 
-        public CarManager(ICarDal carDal, RentACarDb rentACarDb)
+        public CarManager(ICarDal carDal)
         {
             _CarDal = carDal;
-            this.rentACarDb = rentACarDb;
         }
 
         public List<Car> GetAll()
@@ -40,6 +39,11 @@ namespace Business.Concrete
 
 
             return _CarDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max) ;
+        }
+
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            return _CarDal.GetCarDetails();
         }
     }
 }

@@ -8,7 +8,17 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCars(), new RentACarDb());
+            //NewMethod();
+            CarManager carManager = new CarManager(new EfCars());
+            foreach (var car in carManager.GetCarDetailDtos())
+            {
+                Console.WriteLine(car.CarId + "/" + car.BrandName);
+            }
+        }
+
+        private static void NewMethod()
+        {
+            CarManager carManager = new CarManager(new EfCars());
 
             foreach (var car in carManager.GetByDailyPrice(0, 11000))
             {
